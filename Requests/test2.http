@@ -1,0 +1,7 @@
+### Test API redmine
+
+@key = '3141e26b74ff2bcdcd1df91632cdbefb126be450'
+### List issues
+GET https://npr3s.com/control/projects/gti-0868-0498/
+
+###https://npr3s.com/control/issues/GTI-0868,0498

@@ -1,0 +1,13 @@
+
+@key = 3141e26b74ff2bcdcd1df91632cdbefb126be450
+
+POST https://npr3s.com/control/projects/gti-0868-0498/issues.json?key={{key}}
+Content-Type: application/json
+
+{
+  "issue": {
+    "project_id": "1",
+    "subject": "Creating an issue with an uploaded file"
+  }
+}
+
