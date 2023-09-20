@@ -107,7 +107,7 @@ date = new Date(due_date);
       0,//author_name,
 
 
-      subject,
+      subject + " RemineAPI USER - "+ new Date(),
       description,
       formattedDate_start_date,
       formattedDate_due_date,
