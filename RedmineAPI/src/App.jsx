@@ -8,7 +8,7 @@ import './App.css'
 import { Form, ButtonToolbar, Button, Input,Dropdown ,DatePicker  } from 'rsuite';
 
 
-
+import {issueUploader} from "../Services/Issues.js"
 
 const Textarea = React.forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
@@ -22,6 +22,11 @@ const Textarea = React.forwardRef((props, ref) => <Input {...props} as="textarea
 
 
 function App() {
+
+
+
+
+
   const [count, setCount] = useState(0)
   const [StatusDropDownTitle, setStatusDropDownTitle] = useState("Select")
   const [PriorityDropDownTitle, setPriorityDropDownTitle] = useState("Select")
@@ -31,7 +36,118 @@ function App() {
   const [PercentDropDownTitle, setPercentDropDownTitle] = useState("Select")
 
 //new Date()
-  const [value, setValue] = React.useState(null);
+  const [start_date, setstart_date] = useState(null);
+  const [due_date, setdue_date] = useState(null);
+
+  const [estimated_hours, setestimated_hours] = useState(null);
+
+  const [subject, setsubject] = useState("");
+  const [description, setdescription] = useState("");
+
+
+  async function handleSubmit() {
+
+/*
+if(){
+
+  return;
+}
+*/
+
+console.log(start_date);
+console.log(due_date);
+
+
+
+let date = new Date(start_date);
+
+// Extract year, month, and day components
+let year = date.getFullYear();
+// Month is zero-based, so we add 1 to get the correct month
+let month = (date.getMonth() + 1).toString().padStart(2, '0');
+let day = date.getDate().toString().padStart(2, '0');
+
+// Format the date as "YYYY-MM-DD"
+let formattedDate_start_date = `${year}-${month}-${day}`;
+
+
+date = new Date(due_date);
+
+// Extract year, month, and day components
+ year = date.getFullYear();
+// Month is zero-based, so we add 1 to get the correct month
+ month = (date.getMonth() + 1).toString().padStart(2, '0');
+ day = date.getDate().toString().padStart(2, '0');
+
+// Format the date as "YYYY-MM-DD"
+ let formattedDate_due_date = `${year}-${month}-${day}`;
+
+
+
+
+    try{
+    const data = await issueUploader(
+      1, 
+      1,
+      "gti-0868-0498", //
+      1,//tracker_id,
+      TypeDropDownTitle,
+    
+      AsignedToDropDownTitle ,//
+      0,  //status_id, 
+
+      StatusDropDownTitle,
+
+
+      false, //status_is_closed,
+      1,   //priority_id,
+      PriorityDropDownTitle,
+   
+      0, //author_id,
+      0,//author_name,
+
+
+      subject,
+      description,
+      formattedDate_start_date,
+      formattedDate_due_date,
+      Number(PercentDropDownTitle),
+      true, //is_private,
+      Number(estimated_hours),
+      Number(estimated_hours),
+      0, //spent_hours,
+      new Date(), //created_on,
+      new Date(),//updated_on,
+      new Date(),//closed_on,
+
+  );
+
+
+    
+  if(data != null){
+  
+  }
+        alert("Ticket Enviado!!");
+
+
+        console.log(data);
+
+}catch(err){
+  console.log(err);
+alert("Error: No se pudo enviar");
+
+}
+
+
+  }
+
+
+
+
+
+
+
+
   return (
     <>
       <Container>
@@ -64,7 +180,7 @@ function App() {
     </div>
     <Form.Group controlId="text" style={{ display: "flex", flexDirection: "row", alignItems: "center", width: "100%" }}>
   <Form.ControlLabel style={{ flex: "0 0 auto", marginRight: "10px" }}>Asunto: </Form.ControlLabel>
-  <Form.Control name="text" style={{ flex: "1", width: "100%" }} />
+  <Form.Control onChange={setsubject} name="text" style={{ flex: "1", width: "100%" }} />
 </Form.Group>
 
 
@@ -76,7 +192,7 @@ function App() {
   <Form.Group controlId="textarea" style={{ width: "100%" }}>
     <Form.ControlLabel style={{ width: "100%" }}>Descripcion</Form.ControlLabel>
     
-    <Form.Control rows={5} name="textarea" accepter={Textarea} style={{ width: "100%" }} />
+    <Form.Control onChange={setdescription} rows={5} name="textarea" accepter={Textarea} style={{ width: "100%" }} />
   </Form.Group>
 </div>
 
@@ -101,7 +217,7 @@ function App() {
       </div>
       <div style={{ flex: 1 }}>
       Fecha de inicio:  &nbsp;
-      <DatePicker  format="yyyy-MM-dd" style={{ width: 200 }} value={value} onChange={setValue} />
+      <DatePicker  format="yyyy-MM-dd HH:mm:ss" style={{ width: 200 }} value={start_date} onChange={setstart_date} />
       </div>
     </div>
 
@@ -124,7 +240,7 @@ function App() {
       </div>
       <div style={{ flex: 1 }}>
       Fecha fin:  &nbsp;
-      <DatePicker  format="yyyy-MM-dd" style={{ width: 200 }} value={value} onChange={setValue} />
+      <DatePicker  format="yyyy-MM-dd HH:mm:ss" style={{ width: 200 }} value={due_date} onChange={setdue_date} />
       </div>
     </div>
 
@@ -148,7 +264,7 @@ function App() {
       <div style={{ flex: 1 }}>
       Tiempo estimado   &nbsp;
         
-         <input></input>   &nbsp;  Horas 
+         <input onChange={setestimated_hours}></input>   &nbsp;  Horas 
        
       </div>
     </div>
@@ -164,19 +280,19 @@ function App() {
       </div>
       <div style={{ flex: 1 }}>
 
-      Asignado a:  &nbsp;
+     % Terminado:  &nbsp;
       <Dropdown title={PercentDropDownTitle}>
-    <Dropdown.Item onClick={()=>setPercentDropDownTitle("0%")}>0%</Dropdown.Item>
-    <Dropdown.Item onClick={()=>setPercentDropDownTitle("10%")}>10%</Dropdown.Item>
-    <Dropdown.Item onClick={()=>setPercentDropDownTitle("20%")}>20%</Dropdown.Item>
-    <Dropdown.Item onClick={()=>setPercentDropDownTitle("30%")}>30%</Dropdown.Item>
-    <Dropdown.Item onClick={()=>setPercentDropDownTitle("40%")}>40%</Dropdown.Item>
-    <Dropdown.Item onClick={()=>setPercentDropDownTitle("50%")}>50%</Dropdown.Item>
-    <Dropdown.Item onClick={()=>setPercentDropDownTitle("60%")}>60%</Dropdown.Item>
-    <Dropdown.Item onClick={()=>setPercentDropDownTitle("70%")}>70%</Dropdown.Item>
-    <Dropdown.Item onClick={()=>setPercentDropDownTitle("80%")}>80%</Dropdown.Item>
-    <Dropdown.Item onClick={()=>setPercentDropDownTitle("90%")}>90%</Dropdown.Item>
-    <Dropdown.Item onClick={()=>setPercentDropDownTitle("100%")}>100%</Dropdown.Item>
+    <Dropdown.Item onClick={()=>setPercentDropDownTitle(0)}>0%</Dropdown.Item>
+    <Dropdown.Item onClick={()=>setPercentDropDownTitle(10)}>10%</Dropdown.Item>
+    <Dropdown.Item onClick={()=>setPercentDropDownTitle(20)}>20%</Dropdown.Item>
+    <Dropdown.Item onClick={()=>setPercentDropDownTitle(30)}>30%</Dropdown.Item>
+    <Dropdown.Item onClick={()=>setPercentDropDownTitle(40)}>40%</Dropdown.Item>
+    <Dropdown.Item onClick={()=>setPercentDropDownTitle(50)}>50%</Dropdown.Item>
+    <Dropdown.Item onClick={()=>setPercentDropDownTitle(60)}>60%</Dropdown.Item>
+    <Dropdown.Item onClick={()=>setPercentDropDownTitle(70)}>70%</Dropdown.Item>
+    <Dropdown.Item onClick={()=>setPercentDropDownTitle(80)}>80%</Dropdown.Item>
+    <Dropdown.Item onClick={()=>setPercentDropDownTitle(90)}>90%</Dropdown.Item>
+    <Dropdown.Item onClick={()=>setPercentDropDownTitle(100)}>100%</Dropdown.Item>
   </Dropdown>
 
       </div>
@@ -191,7 +307,7 @@ function App() {
     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
       <Form.Group>
         <ButtonToolbar>
-          <Button appearance="primary">Enviar Ticket</Button>
+          <Button appearance="primary" onClick={handleSubmit}>Enviar Ticket</Button>
           <Button appearance="default">Cancelar</Button>
         </ButtonToolbar>
       </Form.Group>
