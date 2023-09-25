@@ -35,9 +35,7 @@ export async function issueUploader(
 ) {
 
 
-  const date = new Date(); // Create a new Date object
-
-  // Format the date to ISO 8601 with the "Z" for UTC timezone
+  const date = new Date(); 
   const formattedDate = date.toISOString();
 
 
@@ -51,7 +49,6 @@ export async function issueUploader(
         "project_name": "gti-0868-0498",
         "tracker_id": 2,
        "assigned_to": assigned_to,
-     
         "tracker_name": tracker_name,
         "status_id": 1,
         "status_name": status_name,

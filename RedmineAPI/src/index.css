@@ -7,19 +7,19 @@ body {
   min-width: 100vw;
 }
 .container {
-  position: relative; /* asegura que los elementos dentro del contenedor se posicionen de manera relativa a este contenedor */
+  position: relative; 
 }
 .container {
-  min-height: 100vh; /* vh significa "viewport height", es decir, la altura de la ventana del navegador */
+  min-height: 100vh; 
 }
 .content {
-  position: absolute; /* asegura que los elementos dentro de "content" se posicionen de manera absoluta dentro del contenedor "container" */
-  top: 50%; /* posiciona el elemento en la mitad superior del contenedor */
-  left: 50%; /* posiciona el elemento en el centro horizontal del contenedor */
+  position: absolute; 
+  top: 50%;
+  left: 50%; 
   transform: translate(
     -50%,
     -50%
-  ); /* centra el elemento tanto vertical como horizontalmente */
+  ); 
 }
 
 :root {
@@ -28,15 +28,6 @@ body {
   --gray: #756388;
   --light: #ffffff;
 }
-/*
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}*/
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

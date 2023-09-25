@@ -11,78 +11,30 @@ import { Form, ButtonToolbar, Button, Input,Dropdown ,DatePicker  } from 'rsuite
 import {issueUploader} from "../Services/Issues.js"
 
 const Textarea = React.forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
-
-
-
-
-
-
-
-
-
-
 function App() {
-
-
-
-
-
   const [count, setCount] = useState(0)
   const [StatusDropDownTitle, setStatusDropDownTitle] = useState("Select")
   const [PriorityDropDownTitle, setPriorityDropDownTitle] = useState("Select")
   const [AsignedToDropDownTitle, setAsignedToDropDownTitle] = useState("Select")
-
   const [TypeDropDownTitle, setTypeDropDownTitle] = useState("Select")
   const [PercentDropDownTitle, setPercentDropDownTitle] = useState("Select")
-
-//new Date()
   const [start_date, setstart_date] = useState(null);
   const [due_date, setdue_date] = useState(null);
-
   const [estimated_hours, setestimated_hours] = useState(null);
-
   const [subject, setsubject] = useState("");
   const [description, setdescription] = useState("");
 
-
   async function handleSubmit() {
-
-/*
-if(){
-
-  return;
-}
-*/
-
-console.log(start_date);
-console.log(due_date);
-
-
-
 let date = new Date(start_date);
-
-// Extract year, month, and day components
 let year = date.getFullYear();
-// Month is zero-based, so we add 1 to get the correct month
 let month = (date.getMonth() + 1).toString().padStart(2, '0');
 let day = date.getDate().toString().padStart(2, '0');
-
-// Format the date as "YYYY-MM-DD"
 let formattedDate_start_date = `${year}-${month}-${day}`;
-
-
 date = new Date(due_date);
-
-// Extract year, month, and day components
  year = date.getFullYear();
-// Month is zero-based, so we add 1 to get the correct month
  month = (date.getMonth() + 1).toString().padStart(2, '0');
  day = date.getDate().toString().padStart(2, '0');
-
-// Format the date as "YYYY-MM-DD"
  let formattedDate_due_date = `${year}-${month}-${day}`;
-
-
 
 
     try{
@@ -92,22 +44,15 @@ date = new Date(due_date);
       "gti-0868-0498", //
       1,//tracker_id,
       TypeDropDownTitle,
-    
       AsignedToDropDownTitle ,//
       0,  //status_id, 
-
       StatusDropDownTitle,
-
-
       false, //status_is_closed,
       1,   //priority_id,
       PriorityDropDownTitle,
-   
       0, //author_id,
       0,//author_name,
-
-
-      subject + " RemineAPI USER - "+ new Date(),
+      String(subject  + ( " por [RemineAPI USER] - "+ new Date())),
       description,
       formattedDate_start_date,
       formattedDate_due_date,
@@ -122,31 +67,14 @@ date = new Date(due_date);
 
   );
 
-
-    
-  if(data != null){
-  
-  }
         alert("Ticket Enviado!!");
-
-
-        console.log(data);
 
 }catch(err){
   console.log(err);
 alert("Error: No se pudo enviar");
 
 }
-
-
   }
-
-
-
-
-
-
-
 
   return (
     <>
@@ -182,11 +110,6 @@ alert("Error: No se pudo enviar");
   <Form.ControlLabel style={{ flex: "0 0 auto", marginRight: "10px" }}>Asunto: </Form.ControlLabel>
   <Form.Control onChange={setsubject} name="text" style={{ flex: "1", width: "100%" }} />
 </Form.Group>
-
-
-
-
-
 
 <div style={{ display: "flex", flexDirection: "row" }}>
   <Form.Group controlId="textarea" style={{ width: "100%" }}>
@@ -298,11 +221,6 @@ alert("Error: No se pudo enviar");
       </div>
     </div>
 
-
-
-
-
-
     <p style={{ marginBottom: "40px" }}></p>
     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
       <Form.Group>
@@ -315,8 +233,6 @@ alert("Error: No se pudo enviar");
    
   </Form>
 </Card>
-
-
 
       </Container>
 

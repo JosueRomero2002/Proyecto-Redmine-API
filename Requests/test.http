@@ -5,9 +5,32 @@ POST https://npr3s.com/control/projects/gti-0868-0498/issues.json?key={{key}}
 Content-Type: application/json
 
 {
-  "issue": {
-    "project_id": "1",
-    "subject": "Creating an issue with an uploaded file"
+    "issue": {
+    "id": 241,
+    "project_id": 19,
+    "project_name": "GTI-0868,0498",
+    "tracker_id": 2,
+    "tracker_name": "Support",
+    "status_id": 1,
+    "status_name": "New",
+    "status_is_closed": false,
+    "priority_id": 2,
+    "priority_name": "Normal",
+    "author_id": 33,
+    "author_name": "Grupo 1 GTI",
+    "subject": "test11",
+    "description": "testttt",
+    "start_date": "2023-06-13",
+    "due_date": null,
+    "done_ratio": 0,
+    "is_private": false,
+    "estimated_hours": null,
+    "total_estimated_hours": null,
+    "spent_hours": 0.0,
+    "total_spent_hours": 0.0,
+    "created_on": "2023-06-13T15:46:32Z",
+    "updated_on": "2023-06-13T15:46:32Z",
+    "closed_on": null
   }
 }
 

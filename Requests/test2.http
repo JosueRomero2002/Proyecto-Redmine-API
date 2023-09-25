@@ -4,4 +4,3 @@
 ### List issues
 GET https://npr3s.com/control/projects/gti-0868-0498/issues.xml?key={{key}}
 
-###https://npr3s.com/control/issues/GTI-0868,0498
